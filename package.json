@@ -1,0 +1,20 @@
+{
+  "name": "golem-js-eth-warsaw-workshop",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "format": "prettier -w ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "excersise-*",
+    "slids"
+  ],
+  "dependencies": {
+    "@golem-sdk/golem-js": "^3.2.0",
+    "@marp-team/marp-cli": "^3.4.0",
+    "prettier": "^3.3.3"
+  }
+}
