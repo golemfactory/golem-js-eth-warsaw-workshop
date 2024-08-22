@@ -24,6 +24,7 @@ Test Workshop 22.08.2024, Online
 ~~ETH Warsaw 05.09.2024, Warsaw~~
 
 ---
+
 ![bg left:50%](assets/ggodlewski-golem.jpg)
 
 # About us
@@ -34,6 +35,7 @@ _Technical Lead_
 _JS/TS SDK Team @ Golem Factory_
 
 ---
+
 ![bg right:50%](assets/jlaskowski-golem.jpg)
 
 # About us
@@ -42,15 +44,12 @@ Jacek Laskowski
 
 _Project Manager @ Golem Factory_
 
-
 ---
 
 # Agenda
 
-Workshop duration: _120min_
-
-- **Introduction** to Golem Network (_20m_)
-- **Workshop**: From scratch to N-tier application (_100m_)
+1. **Introduction** to Golem Network (_20m_)
+2. **Workshop**: From scratch to N-tier application (_100m_)
 
 ---
 
@@ -68,8 +67,8 @@ Workshop duration: _120min_
 
 # Opening questions
 
-* Who did hear about Golem Network?
-* Who did try out Golem Network?
+- Who did hear about Golem Network?
+- Who did try out Golem Network?
 
 ---
 
@@ -81,35 +80,37 @@ Workshop duration: _120min_
 > cryptocurrency tokens (GLM).
 
 ---
+
 ![bg fit](assets/big-picture.png)
 
 ---
 
 # The Plot
 
-* As a **Requestor** you're querying the market for **offers** published by **Providers**.
+- As a **Requestor** you're querying the market for **offers** published by **Providers**.
 
-* You **negotiate and sign an Agreement** which allows you to create an **Activity**
+- You **negotiate and sign an Agreement** which allows you to create an **Activity**
   on the utilizing the Provider's resources - there's a 90s _deadline_ to do it.
 
-* You can execute **Commands** within the Activity that will leverage the rented resources.
+- You can execute **Commands** within the Activity that will leverage the rented resources.
 
-* You will generate costs for the resources (start price, CPU time, ENV time), and will be issued **DebitNotes** which
+- You will generate costs for the resources (start price, CPU time, ENV time), and will be issued **DebitNotes** which
   you have to **accept** so that the resources can still be rented to you.
 
-* Once the **Activity** will be **terminated**, you will **receive an Invoice** for the service which you should *
-  *accept**, so that the payment can be done on the Blockchain.
+- Once the **Activity** will be **terminated**, you will **receive an Invoice** for the service which you should \*
+  \*accept\*\*, so that the payment can be done on the Blockchain.
 
 ---
 
 # Architecture
 
-* The **Provider** spins up a sandboxed runtime which will host the **Activity**. Different type of runtimes utilize
-  different types of payloads. For CPU workloads these are `qemu`  Virtual Machines.
+- The **Provider** spins up a sandboxed runtime which will host the **Activity**. Different type of runtimes utilize
+  different types of payloads. For CPU workloads these are `qemu` Virtual Machines.
 
-* The VMs are created using **Golem Virtual Machine Images** (GVMI for short), which are a derivative of a Docker Image.
+- The VMs are created using **Golem Virtual Machine Images** (GVMI for short), which are a derivative of a Docker Image.
 
 ---
+
 ![bg right](assets/wip.jpg)
 
 # Guest Slide 1/3
@@ -117,6 +118,7 @@ Workshop duration: _120min_
 ## Modelserve
 
 ---
+
 ![bg right](assets/wip.jpg)
 
 # Guest Slide 2/3
@@ -124,6 +126,7 @@ Workshop duration: _120min_
 ## Ray on Golem
 
 ---
+
 ![bg right](assets/wip.jpg)
 
 # Guest Slide 3/3
@@ -136,11 +139,11 @@ Workshop duration: _120min_
 
 Within a sandboxed environment:
 
-* CPU
-* GPU - limited availability
-* Memory
-* Storage
-* Network - limited availability
+- CPU
+- GPU - limited availability
+- Memory
+- Storage
+- Network - limited availability
 
 ---
 
@@ -166,12 +169,12 @@ Within a sandboxed environment:
 
 # How to do it?
 
-* Usage of `golem-network` package to install your Golem Node and explore the toolchain
-* Usage of `@golem-sdk/golem-js` to implement:
-    * **Infrastructure as Code** - creating and acquiring infrastructure components
-    * **Deployment Orchestration** - running workloads on these components
-    * **Access Layer** - accessing the workloads deployed
-    * **Domain Layer** - working with the deployed workloads
+- Usage of `golem-network` package to install your Golem Node and explore the toolchain
+- Usage of `@golem-sdk/golem-js` to implement:
+  - **Infrastructure as Code** - creating and acquiring infrastructure components
+  - **Deployment Orchestration** - running workloads on these components
+  - **Access Layer** - accessing the workloads deployed
+  - **Domain Layer** - working with the deployed workloads
 
 ---
 
@@ -209,8 +212,8 @@ https://docs.golem.network/
 
 - 🙋‍♂️ Ask questions when you have them
 - 🆘 Decentralize help
-    * 🤝 If things are not working for you, team-up with your neighbour
-    * 🤝 If things are working for you, help your neighbour
+  - 🤝 If things are not working for you, team-up with your neighbour
+  - 🤝 If things are working for you, help your neighbour
 
 ---
 
@@ -314,11 +317,11 @@ npm start
 
 ## Program structure review
 
-* `GolemNetwork` as the high level entry-point
-* `MarketOrderSpec` as a way of expressing the requirements
-* `GolemNetwork.connect/disconnect`
-* `GolemNetwork.manyOf/oneOf`
-* Check https://registry.golem.network/explore for more images
+- `GolemNetwork` as the high level entry-point
+- `MarketOrderSpec` as a way of expressing the requirements
+- `GolemNetwork.connect/disconnect`
+- `GolemNetwork.manyOf/oneOf`
+- Check https://registry.golem.network/explore for more images
 
 ---
 
@@ -363,14 +366,14 @@ DEBUG="golem-js:*" npm start
 Enable pretty logging using `@golem-sdk/pino-logger`
 
 ```ts
-import {pinoPrettyLogger} from "@golem-sdk/pino-logger";
+import { pinoPrettyLogger } from "@golem-sdk/pino-logger";
 
 const logger = pinoPrettyLogger({
   level: "info",
 });
 
 const glm = new GolemNetwork({
-  logger
+  logger,
 });
 ```
 
@@ -378,7 +381,7 @@ Subscribe to certain events helping out nin debugging:
 
 ```ts
 glm.market.events.on("offerCounterProposalRejected", (event) => {
-  logger.warn("My offer got rejected", {why: event.reason});
+  logger.warn("My offer got rejected", { why: event.reason });
 });
 ```
 
@@ -401,13 +404,14 @@ Objectives:
 
 You can:
 
-* Use all the memory and threads offered out of the box
-* Control the memory resource requirement via `order.demand.workload.minMemGib`
-* Control the CPU/threads resource requirement via:
-    - `order.demand.workload.minCpuCores`
-    - `order.demand.workload.minCpuThreads`
+- Use all the memory and threads offered out of the box
+- Control the memory resource requirement via `order.demand.workload.minMemGib`
+- Control the CPU/threads resource requirement via:
 
-    * 🌟TIP: Favour **threads** over **cores**
+  - `order.demand.workload.minCpuCores`
+  - `order.demand.workload.minCpuThreads`
+
+  * 🌟TIP: Favour **threads** over **cores**
 
 ---
 
@@ -429,15 +433,15 @@ Objectives:
 
 ### ⚠ Limitations
 
-* The root filesystem mounted at `/` is only `128M`, the image you are using has to specify a `VOLUME`
-* Storage is not persistent, all data persisted to disk will be lost after the Activity is terminated.
+- The root filesystem mounted at `/` is only `128M`, the image you are using has to specify a `VOLUME`
+- Storage is not persistent, all data persisted to disk will be lost after the Activity is terminated.
 
 ### 📚 Key learnings
 
-* The image you are using needs to have a `VOLUME` defined to access the storage. Right now it's not possible to specify
+- The image you are using needs to have a `VOLUME` defined to access the storage. Right now it's not possible to specify
   additional volumes at runtime.
-* 🌟TIP: add `VOLUME /storage` to your images, we did so for some of ours.
-* 🌟TIP: **Download/backup your data** from the Provider to the Requestor.
+- 🌟TIP: add `VOLUME /storage` to your images, we did so for some of ours.
+- 🌟TIP: **Download/backup your data** from the Provider to the Requestor.
 
 ---
 
@@ -484,9 +488,9 @@ Objectives:
 
 In regard to networking, there are 3 distinct aspcts:
 
-* **VPN** for communication between the Golem Provider Nodes that you rent
-* **Inbound** in case you want to make your Golem based solution available publicly
-* **Outbound** in case your workloads running on Golem require internet access
+- **VPN** for communication between the Golem Provider Nodes that you rent
+- **Inbound** in case you want to make your Golem based solution available publicly
+- **Outbound** in case your workloads running on Golem require internet access
 
 ---
 
@@ -494,14 +498,14 @@ In regard to networking, there are 3 distinct aspcts:
 
 ### 📚 Key learnings
 
-* `GolemNetwork.createNetwork/destoryNetwork` to manage networks
-* Pass the network as part of the `MarketOrderSpec`
-* Obtain the node's IP using `ExeUnit.getIp`
+- `GolemNetwork.createNetwork/destoryNetwork` to manage networks
+- Pass the network as part of the `MarketOrderSpec`
+- Obtain the node's IP using `ExeUnit.getIp`
 
 ### ⚠ Limitations
 
-* No built-in DNS for locating providers within the VPN, leverage IPs to locate other nodes
-* While technically you can have more networks, the `golem-js` SDK supports only 1 network at a time.
+- No built-in DNS for locating providers within the VPN, leverage IPs to locate other nodes
+- While technically you can have more networks, the `golem-js` SDK supports only 1 network at a time.
 
 ---
 
@@ -521,13 +525,13 @@ Objectives:
 
 ### 📚 Key learnings
 
-* `ExeUnit.createTcpProxy` helps in building a TCP Server which will allow exposing a service running on Golem via the
+- `ExeUnit.createTcpProxy` helps in building a TCP Server which will allow exposing a service running on Golem via the
   Provider node
-* 🌟TIP: It's good to wait for the service to become ready on Golem Network before starting your proxy
+- 🌟TIP: It's good to wait for the service to become ready on Golem Network before starting your proxy
 
 ### ⚠ Limitations
 
-* ...
+- ...
 
 ---
 
@@ -535,13 +539,13 @@ Objectives:
 
 ### 📚 Key learnings
 
-* Three options: Whitelist, Signed Manifest, Partner Rule
-* Whitelist https://github.com/golemfactory/ya-installer-resources/tree/main/whitelist
+- Three options: Whitelist, Signed Manifest, Partner Rule
+- Whitelist https://github.com/golemfactory/ya-installer-resources/tree/main/whitelist
 
 ### ⚠ Limitations
 
-* In case of HTTPs The Provider Host has to have the proper SSL certs installed to verify the cert-chain
-* Not all providers have the whitelist populated
+- In case of HTTPs The Provider Host has to have the proper SSL certs installed to verify the cert-chain
+- Not all providers have the whitelist populated
 
 ---
 
@@ -554,7 +558,7 @@ golem sdk manifest net add-outbound https://registry.npmjs.org
 ```
 
 ```typescript
-manifest: fs.readFileSync("./manifest.json").toString("base64")
+manifest: fs.readFileSync("./manifest.json").toString("base64");
 ```
 
 ---
@@ -567,13 +571,11 @@ manifest: fs.readFileSync("./manifest.json").toString("base64")
 
 # The Workflow
 
-* Develop
-* Dockerize
-* Golemize
-* Go `testnet`
-* Go `mainnet`
-
-# Part 3: Q&A Session
+- Develop
+- Dockerize
+- Golemize
+- Go `testnet`
+- Go `mainnet`
 
 ---
 
