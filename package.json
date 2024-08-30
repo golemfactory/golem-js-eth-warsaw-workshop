@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "marp --server -w ./slides/",
+    "dev": "PORT=9090 marp --server -w ./slides/",
     "format": "prettier -w ."
   },
   "keywords": [],

@@ -18,9 +18,9 @@ paginate: true
   }
 </style>
 
-# Harnessing Golem Network Compute Power<br />with JavaScript / TypeScript
+# Harnessing Golem Network's Compute Power
 
-Test Workshop 22.08.2024, Online
+Test Workshop (#2) 30.08.2024, Online
 ~~ETH Warsaw 05.09.2024, Warsaw~~
 
 ---
@@ -32,7 +32,7 @@ Test Workshop 22.08.2024, Online
 Grzegorz Godlewski
 
 _Technical Lead_
-_JS/TS SDK Team @ Golem Factory_
+_@ Golem Factory_
 
 ---
 
@@ -42,14 +42,26 @@ _JS/TS SDK Team @ Golem Factory_
 
 Jacek Laskowski
 
-_Project Manager @ Golem Factory_
+_Project Manager_
+_@ Golem Factory_
+
+--- 
+
+# Software requirements
+
+- Supported platform: `Windows`, `Linux`, `macOS`
+- `node --version` min: `18`
+- `docker`
 
 ---
 
 # Agenda
 
-1. **Introduction** to Golem Network (_20m_)
-2. **Workshop**: From scratch to N-tier application (_100m_)
+* **Introduction** to Golem Network (_20m_)
+ 
+* **Workshop**: From scratch to N-tier application (*) (_100m_)
+
+* **Q&A**: At the end of Workshop. You can find us at the Golem booth or directly after the session.
 
 ---
 
@@ -57,7 +69,7 @@ _Project Manager @ Golem Factory_
 
 [Source code of this presentation](https://github.com/golemfactory/golem-js-eth-warsaw-workshop)
 
-![bg right height:50%](assets/qr-eth-warsaw-repo.png)
+![bg right height:75%](assets/golem-slides.png)
 
 ---
 
@@ -81,69 +93,29 @@ _Project Manager @ Golem Factory_
 
 ---
 
-![bg fit](assets/big-picture.png)
-
----
-
 # The Plot
 
-- As a **Requestor** you're querying the market for **offers** published by **Providers**.
+As modelled by
+`@golem-sdk/golem-js`
 
-- You **negotiate and sign an Agreement** which allows you to create an **Activity**
-  on the utilizing the Provider's resources - there's a 90s _deadline_ to do it.
-
-- You can execute **Commands** within the Activity that will leverage the rented resources.
-
-- You will generate costs for the resources (start price, CPU time, ENV time), and will be issued **DebitNotes** which
-  you have to **accept** so that the resources can still be rented to you.
-
-- Once the **Activity** will be **terminated**, you will **receive an Invoice** for the service which you should \*
-  \*accept\*\*, so that the payment can be done on the Blockchain.
+![bg right:62% height:80%](assets/the-plot.png)
 
 ---
 
 # Architecture
 
-- The **Provider** spins up a sandboxed runtime which will host the **Activity**. Different type of runtimes utilize
-  different types of payloads. For CPU workloads these are `qemu` Virtual Machines.
-
-- The VMs are created using **Golem Virtual Machine Images** (GVMI for short), which are a derivative of a Docker Image.
+* The **Provider** spins up a sandboxed runtime which will execute your workloads.
+* The VMs are created using **Golem Virtual Machine Images** (GVMI for short), which are a derivative of a Docker Image.
 
 ---
 
-![bg right](assets/wip.jpg)
+# Compute Resources
 
-# Guest Slide 1/3
-
-## Modelserve
-
----
-
-![bg right](assets/wip.jpg)
-
-# Guest Slide 2/3
-
-## Ray on Golem
-
----
-
-![bg right](assets/wip.jpg)
-
-# Guest Slide 3/3
-
-## GamerHash
-
----
-
-# Resources Offered
-
-Within a sandboxed environment:
-
-- CPU
-- GPU - limited availability
-- Memory
-- Storage
-- Network - limited availability
+* CPU
+* GPU - limited availability
+* Memory
+* Storage
+* Network - limited availability
 
 ---
 
@@ -155,6 +127,15 @@ Within a sandboxed environment:
 
 ---
 
+# Networks
+
+Golem Factory operates the following networks:
+
+- `testnet`
+- `mainnet`
+
+---
+
 # Mainnet
 
 ![bg right:70%](assets/stats-screenshot.png)
@@ -163,44 +144,7 @@ Within a sandboxed environment:
 
 # Goal of the workshop
 
-## Learn how to **access** and **use** the resources offered
-
----
-
-# How to do it?
-
-- Usage of `golem-network` package to install your Golem Node and explore the toolchain
-- Usage of `@golem-sdk/golem-js` to implement:
-  - **Infrastructure as Code** - creating and acquiring infrastructure components
-  - **Deployment Orchestration** - running workloads on these components
-  - **Access Layer** - accessing the workloads deployed
-  - **Domain Layer** - working with the deployed workloads
-
----
-
-# Resources: Documentation
-
-Official documentation available here:
-
-https://docs.golem.network/
-
----
-
-# Resources: Reference implementations
-
-## Libraries
-
-- [@golem-sdk/task-executor](https://www.npmjs.com/package/@golem-sdk/task-executor)
-- [tesseract-ocr-golem](https://www.npmjs.com/package/tesseract-ocr-golem)
-
-## Applications
-
-- [TaskExecutor based React App](https://github.com/golemfactory/golem-sdk-react)
-- [Music on Golem Full-Stack App](https://github.com/golemfactory/music-on-golem)
-
----
-
-# Questions?
+_Learn how to **access** and **use** the resources offered by Providers on the Network_
 
 ---
 
@@ -210,8 +154,8 @@ https://docs.golem.network/
 
 # Workshop Ground Rules
 
-- 🙋‍♂️ Ask questions when you have them
-- 🆘 Decentralize help
+* 🙋‍♂️ Ask for support when facing issues
+* 🆘 Decentralize help
   - 🤝 If things are not working for you, team-up with your neighbour
   - 🤝 If things are working for you, help your neighbour
 
@@ -232,27 +176,10 @@ golem installer
 
 # Start the Golem Node
 golem daemon start
-```
 
----
-
-## Verify the installation
-
-```bash
 # Check general status
 golem daemon status
-
-# Check if yagna is working fine
-golem yagna id show
 ```
-
----
-
-## Working with Golem Network
-
-- `tGLM` - token to pay for work on `testnet`
-- `GLM` - token to pay for work on `mainnet`
-- `app-key` - API key to your local Golem Node
 
 ---
 
@@ -268,13 +195,13 @@ golem yagna payment fund
 # Create an api key, store the output
 golem yagna app-key create eth-warsaw-workshop
 
-# You can retrieve the key later by
+# You can retrieve the key later with 
 golem yagna app-key list
 ```
 
 ---
 
-## Exercise: Scan the market
+## Exercise: Scan the `testnet` market
 
 ```bash
 golem sdk market scan -k your-app-key --payment-network holesky
@@ -284,7 +211,7 @@ golem sdk market scan -k your-app-key --payment-network holesky
 
 ## Lesson 1 checklist
 
-- [ ] You have Golem Node installed, running and having more than 5 sessions
+- [ ] You have Golem Node installed and running
 - [ ] You obtained funds to work with test-net
 - [ ] You created API key for later use with the `YAGNA_APPKEY` environment variable
 
@@ -301,7 +228,7 @@ golem sdk market scan -k your-app-key --payment-network holesky
 mkdir golem-workshop && cd golem-workshop
 
 # Create a new project, use `js-node` for plain JS
-golem sdk new learn-golem -t ts-node
+golem sdk new learn-golem -t ts-node -y
 
 # Build it
 cd learn-golem && npm run build
@@ -315,25 +242,25 @@ npm start
 
 ---
 
-## Program structure review
-
-- `GolemNetwork` as the high level entry-point
-- `MarketOrderSpec` as a way of expressing the requirements
-- `GolemNetwork.connect/disconnect`
-- `GolemNetwork.manyOf/oneOf`
-- Check https://registry.golem.network/explore for more images
+# Requestor Script structure review
 
 ---
 
-## 📚 Key learnings
+## 📚 Key Information
 
-- `ExeUnit` is an instance of a deployed image (like a started Docker container) - in Golem we call it an _activity_.
-- `ExeUnit.run` allows executing arbitrary commands and resolves a `Result` object. It's similar to
-  `docker exec [container] [command]`, it ends when the spawned process terminates
+* `GolemNetwork` as the high level entry-point
+* `MarketOrderSpec` as a way of expressing the requirements
+* `GolemNetwork.connect/disconnect` manages the lifecycle 
+* `GolemNetwork.manyOf/oneOf` help in working with rentals
+* `ExeUnit` is an instance of a deployed image (like a started Docker container) - in Golem we call it an _activity_.
+* `ExeUnit.run` allows executing arbitrary commands and resolves a `Result` object.
+  > It's similar to `docker exec [container] [command]`, it ends when the spawned process terminates
+
+---
 
 ## ⚠ Limitations
 
-- You cannot run two commands simultaneously on the same activity (running container).
+* You cannot run two commands simultaneously on the same activity (running container).
 
 ---
 
@@ -341,29 +268,46 @@ npm start
 
 Objectives:
 
+- Remove the part that uses `manyOf` and leave only the `oneOf` section
 - Use the `golem/node:latest` image from the Golem Registry
-- Obtain the node version from the provider `node --version`
+- Obtain the node version from the provider `node --version` and display it on the screen
 
 ---
 
 # Lesson 2 checklist
 
-- [ ] You know about Golem Registry
-- [ ] You can switch between different images
+
 - [ ] You know about `connect/disconnect` and graceful error handling
 - [ ] You know about the high level `oneOf/manyOf` features
+- [ ] You know about Golem Registry
+- [ ] You can switch between different images
+
 
 ---
 
-# Lesson Y: Debugging
+# Lesson 3: Debugging
 
-Lowe level logging:
+---
+
+## All logs (super verbose!)
+
+You can enable super verbose logs with `DEBUG` like this:
 
 ```bash
 DEBUG="golem-js:*" npm start
 ```
 
-Enable pretty logging using `@golem-sdk/pino-logger`
+---
+
+## Pretty logs
+
+Enable pretty logging with `@golem-sdk/pino-logger`. Run:
+
+```bash
+npm install --save @golem-sdk/pino-logger
+```
+
+And update the code:
 
 ```ts
 import { pinoPrettyLogger } from "@golem-sdk/pino-logger";
@@ -377,6 +321,10 @@ const glm = new GolemNetwork({
 });
 ```
 
+---
+
+## Listen to specific events for debugging
+
 Subscribe to certain events helping out nin debugging:
 
 ```ts
@@ -384,15 +332,6 @@ glm.market.events.on("offerCounterProposalRejected", (event) => {
   logger.warn("My offer got rejected", { why: event.reason });
 });
 ```
-
----
-
-## Exercise: Debugging
-
-Objectives:
-
-- Enable logging using the pretty logger
-- Subscribe to the `offerCounterProposalRejected` event
 
 ---
 
@@ -436,7 +375,7 @@ Objectives:
 - The root filesystem mounted at `/` is only `128M`, the image you are using has to specify a `VOLUME`
 - Storage is not persistent, all data persisted to disk will be lost after the Activity is terminated.
 
-### 📚 Key learnings
+### 📚 Key Information
 
 - The image you are using needs to have a `VOLUME` defined to access the storage. Right now it's not possible to specify
   additional volumes at runtime.
@@ -496,7 +435,7 @@ In regard to networking, there are 3 distinct aspcts:
 
 ## VPN
 
-### 📚 Key learnings
+### 📚 Key Information
 
 - `GolemNetwork.createNetwork/destoryNetwork` to manage networks
 - Pass the network as part of the `MarketOrderSpec`
@@ -523,7 +462,7 @@ Objectives:
 
 ## Inbound
 
-### 📚 Key learnings
+### 📚 Key Information
 
 - `ExeUnit.createTcpProxy` helps in building a TCP Server which will allow exposing a service running on Golem via the
   Provider node
@@ -537,7 +476,7 @@ Objectives:
 
 ## Outbound
 
-### 📚 Key learnings
+### 📚 Key Information
 
 - Three options: Whitelist, Signed Manifest, Partner Rule
 - Whitelist https://github.com/golemfactory/ya-installer-resources/tree/main/whitelist
@@ -563,6 +502,10 @@ manifest: fs.readFileSync("./manifest.json").toString("base64");
 
 ---
 
+# Lesson X: Golem Virtual Images
+
+---
+
 # Lesson X: Switching to mainnet
 
 ⚠ GLM funding!
@@ -578,5 +521,26 @@ manifest: fs.readFileSync("./manifest.json").toString("base64");
 - Go `mainnet`
 
 ---
+
+---
+
+# Resources
+
+- [Golem Official Documentation](https://docs.golem.network/)
+- [Golem Image Registry](https://registry.golem.network/explore)
+
+---
+
+# Resources: Reference implementations
+
+## Libraries
+
+- [@golem-sdk/task-executor](https://www.npmjs.com/package/@golem-sdk/task-executor)
+- [tesseract-ocr-golem](https://www.npmjs.com/package/tesseract-ocr-golem)
+
+## Applications
+
+- [TaskExecutor based React App](https://github.com/golemfactory/golem-sdk-react)
+- [Music on Golem Full-Stack App](https://github.com/golemfactory/music-on-golem)
 
 # Good Luck and Have Fun!
