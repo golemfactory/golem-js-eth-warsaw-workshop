@@ -468,6 +468,15 @@ Check out the [demo app repository](https://github.com/golemfactory/eth-warsaw-d
 
 ---
 
+# Key takeaways
+
+* Use the workflow: _develop, dockerize, golemize_
+* Progress from `testnet` to `mainnet`
+* Separate concerns - application from requestor script
+* Leverage clustering/threading libraries to access all the threads on the provider
+
+---
+
 # Resources: Documentation and examples
 
 - [Golem Official Documentation](https://docs.golem.network/)
