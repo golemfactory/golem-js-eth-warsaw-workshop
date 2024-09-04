@@ -261,7 +261,34 @@ Objectives:
 ## Solution
 
 ```ts
-// TODO
+const rental = await glm.oneOf({
+  order: {
+    demand: {
+      workload: {
+        imageTag: "golem/node:latest",
+      },
+    },
+    market: {
+      rentHours: 15 / 60,
+      pricing: {
+        model: "burn-rate",
+        avgGlmPerHour: 1,
+      },
+    },
+  },
+});
+
+await rental
+  .getExeUnit()
+  .then((exe) => exe.run("node --version"))
+  .then((res) =>
+    res.result === "Ok"
+      ? console.log(res.stdout)
+      : console.error(res.message),
+  )
+  .catch((err) => console.error(err));
+
+await rental.stopAndFinalize();
 ```
 
 ---
@@ -377,8 +404,8 @@ node -e 'console.log({threads: os.availableParallelism(), memGib: os.freemem()/1
 
 ### ⚠ Limitations
 
-- The root filesystem mounted at `/` is only `128M`
-- Storage in Golem is not persistent, all data persisted to disk will be lost after the Activity is terminated.
+* The root filesystem mounted at `/` is only `128M`
+* Storage in Golem is not persistent, all data persisted to disk will be lost after the Activity is terminated.
 
 ---
 
@@ -400,17 +427,17 @@ mnt0             99G   34G   61G  37% /storage
 
 In regard to networking, there are 3 distinct aspects:
 
-- **VPN** for communication between the Golem Provider Nodes that you rent
-- **Inbound** in case you want to make your Golem based solution available publicly
-- **Outbound** in case your workloads running on Golem require internet access
+* **VPN** for communication between the Golem Provider Nodes that you rent
+* **Inbound** in case you want to make your Golem based solution available publicly
+* **Outbound** in case your workloads running on Golem require internet access
 
 ---
 
-PROVIDE THE IMAGE HERE, SIMPLE!
+![bg center height:90%](assets/networking.png)
 
 ---
 
-## Lesson 4 Checklist
+## Lesson 4 checklist
 
 ✅ You know how CPU, threads and memory work on Golem
 ✅ You know about how Storage works on Golem and how to cope with that
@@ -418,7 +445,7 @@ PROVIDE THE IMAGE HERE, SIMPLE!
 
 ---
 
-# The Fast Forward
+# N-tier application running on top of Golem Network
 
 ---
 
@@ -431,15 +458,9 @@ PROVIDE THE IMAGE HERE, SIMPLE!
 
 ---
 
-## Architecture
+# Demo time!
 
----
-
-## Downloading the repo, building the project and running in docker
-
----
-
-## Running the project on testnet, scaling the workers
+Check out the [demo app repository](https://github.com/golemfactory/eth-warsaw-dc-app), follow the instructions from the README file.
 
 ---
 
@@ -448,7 +469,7 @@ PROVIDE THE IMAGE HERE, SIMPLE!
 - [Golem Official Documentation](https://docs.golem.network/)
 - [Golem Image Registry](https://registry.golem.network/explore)
 - [`@golem-sdk/golem-js` on NPM](https://www.npmjs.com/package/@golem-sdk/golem-js)
-- [Examples based on `golem-js`](https://github.com/golemfactory/golem-js/tree/master/examples)
+- [Examples based on `golem-js`](https://github.com/golemfactory/golem-js/tree/master/examples) - explore various usage patterns at your disposal
 
 ---
 
