@@ -130,6 +130,10 @@ Golem Factory operates the following networks:
 
 ---
 
+# Questions?
+
+---
+
 # Part 2: Workshop
 
 ---
