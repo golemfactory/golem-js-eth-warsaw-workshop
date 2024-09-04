@@ -186,12 +186,12 @@ golem daemon status
 ## Exercise: Obtaining test funds and API keys
 
 ```bash
-# Check the current status of your funds
-golem yagna payment status
-
 # Request funding with tGLM
 golem yagna payment fund
 
+# Check the current status of your funds
+golem yagna payment status
+  
 # Create an api key, store the output
 golem yagna app-key create eth-warsaw-workshop
 
@@ -325,7 +325,7 @@ const glm = new GolemNetwork({
 
 ## Listen to specific events for debugging
 
-Subscribe to certain events helping out nin debugging:
+Subscribe to certain events helping out in debugging:
 
 ```ts
 glm.market.events.on("offerCounterProposalRejected", (event) => {
@@ -524,10 +524,12 @@ manifest: fs.readFileSync("./manifest.json").toString("base64");
 
 ---
 
-# Resources
+# Resources: Documentation and examples
 
 - [Golem Official Documentation](https://docs.golem.network/)
 - [Golem Image Registry](https://registry.golem.network/explore)
+- [`@golem-sdk/golem-js` on NPM](https://www.npmjs.com/package/@golem-sdk/golem-js)
+- [Examples based on `golem-js`](https://github.com/golemfactory/golem-js/tree/master/examples)
 
 ---
 
@@ -535,12 +537,14 @@ manifest: fs.readFileSync("./manifest.json").toString("base64");
 
 ## Libraries
 
-- [@golem-sdk/task-executor](https://www.npmjs.com/package/@golem-sdk/task-executor)
-- [tesseract-ocr-golem](https://www.npmjs.com/package/tesseract-ocr-golem)
+- [@golem-sdk/task-executor](https://www.npmjs.com/package/@golem-sdk/task-executor) - _Task Model_ implementation
+- [tesseract-ocr-golem](https://www.npmjs.com/package/tesseract-ocr-golem) - A complete OCR library that uses Golem as backend
 
 ## Applications
 
-- [TaskExecutor based React App](https://github.com/golemfactory/golem-sdk-react)
+- [TaskExecutor + React Image Recognition App](https://github.com/golemfactory/golem-sdk-react/tree/master/examples/react-with-vite)
 - [Music on Golem Full-Stack App](https://github.com/golemfactory/music-on-golem)
 
-# Good Luck and Have Fun!
+---
+
+# Good Luck and Have Fun during the Hackathon!
