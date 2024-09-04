@@ -20,8 +20,11 @@ paginate: true
 
 # Harnessing Golem Network's Compute Power
 
-Test Workshop (#2) 30.08.2024, Online
-~~ETH Warsaw 05.09.2024, Warsaw~~
+## ETH Warsaw
+
+05.09.2024, Warsaw
+
+![bg right](assets/bg-bubbles.png)
 
 ---
 
@@ -49,19 +52,24 @@ _@ Golem Factory_
 
 # Software requirements
 
-- Supported platform: `Windows`, `Linux`, `macOS`
-- `node --version` min: `18`
-- `docker`
+* Supported platform: `Windows`, `Linux`, `macOS`
+* `node --version` min: `18` to build apps and requestor-scripts
+* `docker` when you will be building GVMI for Golem Registry
 
 ---
 
 # Agenda
 
-* **Introduction** to Golem Network (_20m_)
- 
-* **Workshop**: From scratch to N-tier application (*) (_100m_)
+* **Introduction** (_~20m_)
+    * The Golem Network
+    * Short Q&A
 
-* **Q&A**: At the end of Workshop. You can find us at the Golem booth or directly after the session.
+* **Workshop**  (_~90m_)
+    * Start from scratch with the ecosystem
+    * Rest break (_10m_)
+    * Fast-forward to N-tier application
+
+* **Q&A** session
 
 ---
 
@@ -79,51 +87,32 @@ _@ Golem Factory_
 
 # Opening questions
 
-- Who did hear about Golem Network?
-- Who did try out Golem Network?
+* Who did hear about Golem Network?
+* Who did try out Golem Network?
 
 ---
 
 # What is Golem Network
 
-> Golem Network **democratizes** society’s access to computing power by creating
-> a **decentralized** platform where anyone can build a variety of applications,
-> request computational resources and/or offer their idle systems in exchange for
-> cryptocurrency tokens (GLM).
+* It's a P2P network where **Providers** and **Requestors** connect to exchange **compute resources** (the _value_) for
+  cryptocurrency tokens (GLM, the _reward_).
+* The **Creators** build solutions that the **Requestors** can leverage with resources from **Providers**.
 
 ---
 
 # The Plot
 
-As modelled by
-`@golem-sdk/golem-js`
-
 ![bg right:62% height:80%](assets/the-plot.png)
-
----
-
-# Architecture
-
-* The **Provider** spins up a sandboxed runtime which will execute your workloads.
-* The VMs are created using **Golem Virtual Machine Images** (GVMI for short), which are a derivative of a Docker Image.
 
 ---
 
 # Compute Resources
 
-* CPU
-* GPU - limited availability
-* Memory
-* Storage
-* Network - limited availability
-
----
-
-# Runtime types
-
-- CPU - `vm`
-- GPU - `vm-nvidia`
-- WASM - `wasmtime`
+- CPU
+- GPU - limited availability
+- Memory
+- Storage
+- Network (VPN, outbound, inbound)
 
 ---
 
@@ -136,15 +125,8 @@ Golem Factory operates the following networks:
 
 ---
 
-# Mainnet
 
-![bg right:70%](assets/stats-screenshot.png)
-
----
-
-# Goal of the workshop
-
-_Learn how to **access** and **use** the resources offered by Providers on the Network_
+![bg fit](assets/stats-screenshot.png)
 
 ---
 
@@ -154,10 +136,8 @@ _Learn how to **access** and **use** the resources offered by Providers on the N
 
 # Workshop Ground Rules
 
-* 🙋‍♂️ Ask for support when facing issues
-* 🆘 Decentralize help
-  - 🤝 If things are not working for you, team-up with your neighbour
-  - 🤝 If things are working for you, help your neighbour
+* 🆘 Ask for support when facing issues
+* 🤝 Join or help your neighbour
 
 ---
 
@@ -187,33 +167,37 @@ golem daemon status
 
 ```bash
 # Request funding with tGLM
-golem yagna payment fund
+yagna payment fund
 
 # Check the current status of your funds
-golem yagna payment status
+yagna payment status
   
 # Create an api key, store the output
-golem yagna app-key create eth-warsaw-workshop
+yagna app-key create eth-warsaw-workshop
+# out: ec90...20e3
 
 # You can retrieve the key later with 
-golem yagna app-key list
+yagna app-key list
 ```
 
 ---
 
 ## Exercise: Scan the `testnet` market
 
+Use your app-key to scan the market
+
 ```bash
-golem sdk market scan -k your-app-key --payment-network holesky
+golem sdk market scan -k "ec90...20e3" --payment-network holesky
 ```
 
 ---
 
 ## Lesson 1 checklist
 
-- [ ] You have Golem Node installed and running
-- [ ] You obtained funds to work with test-net
-- [ ] You created API key for later use with the `YAGNA_APPKEY` environment variable
+✅ You have Golem Node installed and running
+✅ You obtained funds to work with test-net
+✅ You created API key for later use
+✅ You can see the offers in the `testnet`
 
 ---
 
@@ -234,7 +218,7 @@ golem sdk new learn-golem -t ts-node -y
 cd learn-golem && npm run build
 
 # Provision configuration via ENV...
-echo 'YAGNA_APPKEY=your-app-key' > .env
+echo 'YAGNA_APPKEY=ec90...20e3' > .env
 
 # ...and run the project
 npm start
@@ -250,9 +234,9 @@ npm start
 
 * `GolemNetwork` as the high level entry-point
 * `MarketOrderSpec` as a way of expressing the requirements
-* `GolemNetwork.connect/disconnect` manages the lifecycle 
+* `GolemNetwork.connect/disconnect` manages the lifecycle
 * `GolemNetwork.manyOf/oneOf` help in working with rentals
-* `ExeUnit` is an instance of a deployed image (like a started Docker container) - in Golem we call it an _activity_.
+* `ExeUnit` is an instance of a deployed image (like a started Docker container)
 * `ExeUnit.run` allows executing arbitrary commands and resolves a `Result` object.
   > It's similar to `docker exec [container] [command]`, it ends when the spawned process terminates
 
@@ -274,28 +258,24 @@ Objectives:
 
 ---
 
-# Lesson 2 checklist
+## Solution
 
+```ts
+// TODO
+```
 
-- [ ] You know about `connect/disconnect` and graceful error handling
-- [ ] You know about the high level `oneOf/manyOf` features
-- [ ] You know about Golem Registry
-- [ ] You can switch between different images
+---
 
+## Lesson 2 checklist
+
+✅ You know about `connect/disconnect` and graceful error handling
+✅ You know about the high level `oneOf/manyOf` features
+✅ You know about Golem Registry
+✅ You can switch between different images
 
 ---
 
 # Lesson 3: Debugging
-
----
-
-## All logs (super verbose!)
-
-You can enable super verbose logs with `DEBUG` like this:
-
-```bash
-DEBUG="golem-js:*" npm start
-```
 
 ---
 
@@ -310,7 +290,7 @@ npm install --save @golem-sdk/pino-logger
 And update the code:
 
 ```ts
-import { pinoPrettyLogger } from "@golem-sdk/pino-logger";
+import {pinoPrettyLogger} from "@golem-sdk/pino-logger";
 
 const logger = pinoPrettyLogger({
   level: "info",
@@ -329,28 +309,43 @@ Subscribe to certain events helping out in debugging:
 
 ```ts
 glm.market.events.on("offerCounterProposalRejected", (event) => {
-  logger.warn("My offer got rejected", { why: event.reason });
+  logger.warn("My offer got rejected", {why: event.reason});
 });
 ```
 
 ---
 
-# Lesson 3: Memory & CPU Resources
+## DEBUG way
+
+You can enable super verbose logs with `DEBUG` like this:
+
+```bash
+DEBUG="golem-js:*" npm start
+```
 
 ---
 
-### Memory and CPU
+## Lesson 3 checklist
 
-You can:
+✅ You know about the additional logging package
+✅ You know about the existence of `.events`
+✅ You know how to turn super verbose, low-level logging
 
-- Use all the memory and threads offered out of the box
-- Control the memory resource requirement via `order.demand.workload.minMemGib`
-- Control the CPU/threads resource requirement via:
+---
 
-  - `order.demand.workload.minCpuCores`
-  - `order.demand.workload.minCpuThreads`
+# Lesson 4: Working with Compute Resources
 
-  * 🌟TIP: Favour **threads** over **cores**
+---
+
+## Memory and CPU
+
+* You can use all the **memory** and **threads** offered out of the box
+* Control the resource requirement via:
+    - `order.demand.workload.minMemGib`
+    - `order.demand.workload.minCpuThreads`
+    - `order.demand.workload.minCpuCores`
+    - 🌟TIP: Favour **threads** over **cores**
+* GPU has a set of experimental properties to filter by
 
 ---
 
@@ -358,13 +353,23 @@ You can:
 
 Objectives:
 
-- Scan the market to learn about available resources.
 - Update your script and specify requirements for CPU threads and memory.
-- Display the name of the provider `ExeUnit.provider.name` to verify if you managed to get the one you were aiming for.
+
+```bash
+node -e 'console.log({threads: os.availableParallelism(), memGib: os.freemem()/1024/1024/1024})'
+```
 
 ---
 
-# Lesson 4: Storage
+## Storage
+
+### 📚 Key Information
+
+* Set requirements with `order.dmand.workload.minStorageGib`
+* The image you are using needs to have a `VOLUME` defined to access the storage. Right now it's not possible to specify additional volumes at runtime.
+* 🌟TIP: add `VOLUME /storage` to your
+  images, [we did so for some of ours](https://github.com/golemfactory/golem-sdk-registry-images).
+* 🌟TIP: **Download/backup your data** from the Provider to the Requestor - `ExeUnit.uploadFile/downloadFile`.
 
 ---
 
@@ -372,15 +377,8 @@ Objectives:
 
 ### ⚠ Limitations
 
-- The root filesystem mounted at `/` is only `128M`, the image you are using has to specify a `VOLUME`
-- Storage is not persistent, all data persisted to disk will be lost after the Activity is terminated.
-
-### 📚 Key Information
-
-- The image you are using needs to have a `VOLUME` defined to access the storage. Right now it's not possible to specify
-  additional volumes at runtime.
-- 🌟TIP: add `VOLUME /storage` to your images, we did so for some of ours.
-- 🌟TIP: **Download/backup your data** from the Provider to the Requestor.
+- The root filesystem mounted at `/` is only `128M`
+- Storage in Golem is not persistent, all data persisted to disk will be lost after the Activity is terminated.
 
 ---
 
@@ -393,39 +391,14 @@ overlay         128M  8.0K  128M   1% /
 devtmpfs        3.9G     0  3.9G   0% /dev
 tmpfs           3.9G     0  3.9G   0% /tmp
 tmpfs           3.9G     0  3.9G   0% /dev/shm
-mnt0             99G   34G   61G  37% /golem/work
-mnt1             99G   34G   61G  37% /golem/output
-mnt2             99G   34G   61G  37% /golem/input
+mnt0             99G   34G   61G  37% /storage
 ```
 
 ---
 
-## Exercise: Upload, execute and download
+## Networking
 
-Objectives:
-
-- Use `oneOf` to rent resources
-- Upload a Node.js script to `/storage` using `ExeUnit.uploadFile`
-- Execute the script to learn about the available resources, save the information in a file
-- Download the `resources.json` file back to the Requestor using `ExeUnit.downloadFile`
-- ~~🐛Place upload and download logic in `setup` and `teardown` callbacks.~~
-
----
-
-## Lesson 3 checklist
-
-- [ ] You know how to upload and download a file to the provider
-- [🐛] ~~You know how to utilize `setup/teardown`~~
-
----
-
-# Lesson 4: Networking
-
----
-
-## Networking aspects
-
-In regard to networking, there are 3 distinct aspcts:
+In regard to networking, there are 3 distinct aspects:
 
 - **VPN** for communication between the Golem Provider Nodes that you rent
 - **Inbound** in case you want to make your Golem based solution available publicly
@@ -433,82 +406,19 @@ In regard to networking, there are 3 distinct aspcts:
 
 ---
 
-## VPN
-
-### 📚 Key Information
-
-- `GolemNetwork.createNetwork/destoryNetwork` to manage networks
-- Pass the network as part of the `MarketOrderSpec`
-- Obtain the node's IP using `ExeUnit.getIp`
-
-### ⚠ Limitations
-
-- No built-in DNS for locating providers within the VPN, leverage IPs to locate other nodes
-- While technically you can have more networks, the `golem-js` SDK supports only 1 network at a time.
+PROVIDE THE IMAGE HERE, SIMPLE!
 
 ---
 
-## Exercise: Ping nodes
+## Lesson 4 Checklist
 
-Objectives:
-
-- Create a network
-- Rent out 2 nodes that will be placed within these networks, use `golem/alpine:latest` image
-- Obtain IP of the first node and ping it from the other one using the IP by sending a finite number of pings
-  `ping -c 5 [ip]`
-- Make sure that you clean up resources properly
+✅ You know how CPU, threads and memory work on Golem
+✅ You know about how Storage works on Golem and how to cope with that
+✅ You know about networking options, their capabilities and constraints
 
 ---
 
-## Inbound
-
-### 📚 Key Information
-
-- `ExeUnit.createTcpProxy` helps in building a TCP Server which will allow exposing a service running on Golem via the
-  Provider node
-- 🌟TIP: It's good to wait for the service to become ready on Golem Network before starting your proxy
-
-### ⚠ Limitations
-
-- ...
-
----
-
-## Outbound
-
-### 📚 Key Information
-
-- Three options: Whitelist, Signed Manifest, Partner Rule
-- Whitelist https://github.com/golemfactory/ya-installer-resources/tree/main/whitelist
-
-### ⚠ Limitations
-
-- In case of HTTPs The Provider Host has to have the proper SSL certs installed to verify the cert-chain
-- Not all providers have the whitelist populated
-
----
-
-```bash
-# Create a manifest for the image you're going to use
-golem sdk manifest create golem/node:latest
-
-# Add NPM to the manifest
-golem sdk manifest net add-outbound https://registry.npmjs.org
-```
-
-```typescript
-manifest: fs.readFileSync("./manifest.json").toString("base64");
-```
-
----
-
-# Lesson X: Golem Virtual Images
-
----
-
-# Lesson X: Switching to mainnet
-
-⚠ GLM funding!
+# The Fast Forward
 
 ---
 
@@ -516,11 +426,20 @@ manifest: fs.readFileSync("./manifest.json").toString("base64");
 
 - Develop
 - Dockerize
-- Golemize
-- Go `testnet`
-- Go `mainnet`
+- Golemize with `testnet`
+- Move to `mainnet`
 
 ---
+
+## Architecture
+
+---
+
+## Downloading the repo, building the project and running in docker
+
+---
+
+## Running the project on testnet, scaling the workers
 
 ---
 
@@ -538,7 +457,8 @@ manifest: fs.readFileSync("./manifest.json").toString("base64");
 ## Libraries
 
 - [@golem-sdk/task-executor](https://www.npmjs.com/package/@golem-sdk/task-executor) - _Task Model_ implementation
-- [tesseract-ocr-golem](https://www.npmjs.com/package/tesseract-ocr-golem) - A complete OCR library that uses Golem as backend
+- [tesseract-ocr-golem](https://www.npmjs.com/package/tesseract-ocr-golem) - A complete OCR library that uses Golem as
+  backend
 
 ## Applications
 
@@ -548,3 +468,63 @@ manifest: fs.readFileSync("./manifest.json").toString("base64");
 ---
 
 # Good Luck and Have Fun during the Hackathon!
+
+---
+
+# Appendix: VPN
+
+## 📚 Key Information
+
+- `GolemNetwork.createNetwork/destoryNetwork` to manage networks
+- Pass the network as part of the `MarketOrderSpec`
+- Obtain the node's IP using `ExeUnit.getIp`
+
+## ⚠ Limitations
+
+- No built-in DNS for locating providers within the VPN, leverage IPs to locate other nodes
+- While technically you can have more networks, the `golem-js` SDK supports only 1 network at a time.
+
+---
+
+# Appendix: Inbound
+
+## 📚 Key Information
+
+- `ExeUnit.createTcpProxy` helps in building a TCP Server which will allow exposing a service running on Golem via the
+  Provider node
+
+## ⚠ Limitations
+
+- Golem does not support direct inbound from the Internet, you have to expose a proxy
+
+🌟TIP: It's good to wait for the service to become ready on Golem Network before starting your proxy
+
+---
+
+# Appendix: Outbound
+
+## 📚 Key Information
+
+- Three options: Whitelist, Signed Manifest, Partner Rule
+- Whitelist https://github.com/golemfactory/ya-installer-resources/tree/main/whitelist
+
+## ⚠ Limitations
+
+- In case of HTTPs The Provider Host has to have the proper SSL certs installed to verify the cert-chain
+- Not all providers have the whitelist populated
+
+---
+
+# Appendix: Outbound (continued)
+
+```bash
+# Create a manifest for the image you're going to use
+golem sdk manifest create golem/node:latest
+
+# Add NPM to the manifest
+golem sdk manifest net add-outbound https://registry.npmjs.org
+```
+
+```ts
+manifest: fs.readFileSync("./manifest.json").toString("base64");
+```
