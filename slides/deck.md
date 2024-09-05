@@ -380,6 +380,12 @@ DEBUG="golem-js:*" npm start
 
 ---
 
+> 🌟 TIP 🌟
+>
+> When using `testnet` look for machines with min number of threads: `4` or `8` and runtime version `0.4.2`
+
+---
+
 ## Exercise: Specify resource requirements
 
 Objectives:
