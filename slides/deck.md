@@ -191,7 +191,7 @@ yagna app-key list
 Use your app-key to scan the market
 
 ```bash
-golem sdk market scan -k "ec90...20e3" --payment-network holesky
+golem sdk market scan -k "ec90...20e3" --testnet
 ```
 
 ---
@@ -446,6 +446,14 @@ In regard to networking, there are 3 distinct aspects:
 ✅ You know how CPU, threads and memory work on Golem
 ✅ You know about how Storage works on Golem and how to cope with that
 ✅ You know about networking options, their capabilities and constraints
+
+---
+
+# Rest Break
+
+---
+
+![bg fit](assets/corgo-background.png)
 
 ---
 
