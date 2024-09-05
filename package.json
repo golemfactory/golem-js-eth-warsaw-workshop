@@ -1,14 +1,14 @@
 {
   "name": "golem-js-eth-warsaw-workshop-slides",
+  "private": true,
   "version": "1.0.0",
-  "description": "",
   "scripts": {
     "dev": "PORT=9090 marp --server -w ./slides/",
     "format": "prettier -w ."
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Grzegorz Godlewski <grzegorz.godlewski@golem.network>",
+  "license": "LGPL-3.0",
   "dependencies": {
     "@marp-team/marp-cli": "^3.4.0",
     "prettier": "^3.3.3"
